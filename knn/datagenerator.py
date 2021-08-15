@@ -16,7 +16,7 @@ output, error = process.communicate()
 os.mkdir('data')
 
 n_list = np.linspace(50, MAX_N, num=N_NUM, dtype=int)
-m_list = np.linspace(2, MAX_N, num=N_NUM, dtype=int)
+m_list = np.linspace(2, MAX_M, num=M_NUM, dtype=int)
 
 mean = [0, 0]
 cov = [[0.01, 0], [0, 0.01]]  # diagonal covariance
@@ -28,6 +28,7 @@ for n in n_list:
         names_list = ['x{}'.format(i) for i in range(0, m)] + ['label']
         df = pd.DataFrame(columns = names_list)
         for calss_id in range(0, N_CLASSES):
+            print("n{}m{}id{}".format(n, m, calss_id))
             mean = np.random.uniform(-0.5, 0.5, m)
             points = np.random.multivariate_normal(mean, cov, n)
             labels = np.full((n, 1), calss_id, dtype=int)
