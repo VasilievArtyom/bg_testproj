@@ -77,11 +77,12 @@ os.mkdir('results')
 
 n_list = np.linspace(50, MAX_N, num=N_NUM, dtype=int)
 m_list = np.linspace(2, MAX_M, num=M_NUM, dtype=int)
-fold_list = range(4)
+fold_list = [0] #range(4)
 
 for n in n_list*N_CLASSES:
     for m in m_list:
         for fold_id in fold_list:
+            print(n, m, fold_id)
             x_train, y_train, x, y_true = collect_data_by_params(n, m, fold_id)
             classifier = KNN_Classifier(x_train, y_train, metric='absolute')
             y_pred = classifier.classify(x)
