@@ -3,3 +3,6 @@ images/**/*.jpg
 dataset/*.jpg
 knn/data/*.csv
 !knn/data/n15050m2*.csv
+knn/results/*.csv
+!knn/results/n15050m2*.csv
+!knn/results/*report*.csv
