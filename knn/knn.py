@@ -30,17 +30,15 @@ class KNN_Classifier:
             inv_train_norms = 1.0 / np.sqrt(np.array([[np.sum(y*y) for y in self.train_points] for x in test_points]))
             pp_distance = dotroducts * inv_test_norms * inv_train_norms
         elif self.metric == 'euclidean':
-            pp_distance = np.sqrt(np.array([[np.sum(y*y) for y in self.train_points] for x in test_points]))
+            pp_distance = np.sqrt(np.array([[np.sum(np.square(x - y)) for y in self.train_points] for x in test_points]))
         else:
             print("Unknown metric.  The default Euclidean metric will be used.")
-            pp_distance = np.sqrt(np.array([[np.sum(y*y) for y in self.train_points] for x in test_points]))
+            pp_distance = np.sqrt(np.array([[np.sum(np.square(x - y)) for y in self.train_points] for x in test_points]))
         return np.argsort(pp_distance, axis=1)[:, 0:self.k]
     
 
 
     def classify(self, test_points):
-        # N_test, M = test_points.shape
-        # N_test
         pred_labels = np.array([self.train_labels[x] for x in self.knn(test_points)], dtype=int)
         majority_vote = [np.argmax(np.bincount(x)) for x in pred_labels]
         return majority_vote
